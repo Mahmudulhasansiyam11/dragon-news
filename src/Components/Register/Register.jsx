@@ -24,11 +24,11 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     createUser(email, password)
     .then(result => {
-      console.log(result.user);
+      // console.log(result.user);
 
       // Implement update user profile
       updateUser({

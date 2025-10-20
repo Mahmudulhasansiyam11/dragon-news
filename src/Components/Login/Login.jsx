@@ -19,7 +19,7 @@ const Login = () => {
 
     signIn(email, password)
     .then(result => {
-      console.log(result.user);
+      // console.log(result.user);
       setUser(result.user);
 
       // Implement redirect for login
