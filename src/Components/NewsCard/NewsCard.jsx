@@ -1,8 +1,9 @@
 import { FaEye, FaStar } from "react-icons/fa"; // For views and rating icons
+import { Link } from "react-router";
 // For the trending badge
 
 const NewsCard = ({ news }) => {
-  const { title, rating, total_view, author, thumbnail_url, details, tags } =
+  const { id, title, rating, total_view, author, thumbnail_url, details, tags } =
     news;
 
   return (
@@ -43,7 +44,16 @@ const NewsCard = ({ news }) => {
       
 
         {/* Details */}
-        <p className="mt-3 text-gray-700 text-sm">{details.slice(0, 150)}...</p>
+        <div className="mt-3 text-gray-700 text-sm">
+          {details.length > 200 ? (
+            <>
+              {details.slice(0, 200)}...
+              <Link to={`/news-details/${id}`} className="text-primary font-semibold cursor-pointer hover:underline">Read More</Link>
+            </>
+          ) : (
+            details
+          )}
+        </div>
 
         {/* Tags */}
         <div className="mt-3">

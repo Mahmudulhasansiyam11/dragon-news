@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router";
-import HomeLayout from "../Layouts/HomeLayout";
-import Home from "../Pages/Home/Home";
-import CategoryNews from "../Pages/CategoryNews/CategoryNews";
 import AuthLayout from "../Components/AuthLayout/AuthLayout";
+import Loading from "../Components/Loading/Loading";
 import Login from "../Components/Login/Login";
+import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import Register from "../Components/Register/Register";
+import HomeLayout from "../Layouts/HomeLayout";
+import CategoryNews from "../Pages/CategoryNews/CategoryNews";
+import Home from "../Pages/Home/Home";
+import NewsDetails from "../Pages/NewsDetails/NewsDetails";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +21,8 @@ const router = createBrowserRouter([
             {
                 path: "/category/:id",
                 element: <CategoryNews></CategoryNews>,
-                loader: () => fetch('/news.json')
+                loader: () => fetch('/news.json'),
+                hydrateFallbackElement: <Loading></Loading>
             }
         ]
     },
@@ -37,8 +41,12 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: "/news",
-        element: <h2>News Layout</h2>
+        path: "/news-details/:id",
+        element: <PrivateRoute>
+            <NewsDetails></NewsDetails>
+        </PrivateRoute>,
+        loader: () => fetch('/news.json'),
+        hydrateFallbackElement: <Loading></Loading>
     },
     {
         path: "/*",
